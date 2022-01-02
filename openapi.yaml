@@ -157,45 +157,17 @@ paths:
           content: {}
 
   /login:
-    get:
+    post:
       tags:
         - login
-      summary: Logs user into the system
-      operationId: userLogin
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: true
-          schema:
-            type: string
+      summary: Log in and get cookie for authentication
       responses:
-        200:
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
+        "200":
+          description: Successfull request
           content:
             application/json:
               schema:
-                type: string
-        400:
-          description: Invalid username/password supplied
-          content: {}
+                $ref: '#/components/schemas/Login'
 
 components:
   schemas:
@@ -216,14 +188,11 @@ components:
           type: string
           format: date-time
 
-    User:
+    Login:
       type: object
       properties:
-        username:
+        email:
           type: string
+          format: email
         password:
           type: string
-        userStatus:
-          type: integer
-          description: User Status
-          format: int32

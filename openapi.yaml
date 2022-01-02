@@ -145,7 +145,6 @@ paths:
           required: true
           type: journey
           description: jounrey which should be deleted
-          required: true
       responses:
         '400':
           description: Invalid journey supplied

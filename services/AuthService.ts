@@ -128,8 +128,8 @@ class AuthService {
     const correctPassword = await this.checkPassword(email, password);
     if (correctPassword) {
       const sessionId = crypto.randomUUID();
-      const isSet = await this.setSessionId(sessionId, email);
-      if(isSet) return sessionId; //todo check for problems!!!
+      await this.setSessionId(sessionId, email);
+      return sessionId; //todo check for problems!!!
     }
     return undefined;
   }

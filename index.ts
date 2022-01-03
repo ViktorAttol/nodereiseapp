@@ -17,7 +17,7 @@ const journeyService = new JourneyService(knex);
 
 app.use(
   cors({
-    origin: "https://happy-brahmagupta-cdfea2.netlify.app/",
+    origin: "https://happy-brahmagupta-cdfea2.netlify.app",
     credentials: true,
   })
 );

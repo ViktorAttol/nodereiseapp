@@ -99,7 +99,7 @@ app.post("/login", async (req, res) => {
   //hier wird der cookie erstellt
   res.cookie("session", sessionId, {
     maxAge: 60 * 60 * 1000,
-    httpOnly: true,
+    httpOnly: false,
     sameSite: "none",
     secure: process.env.NODE_ENV === "production",
   });

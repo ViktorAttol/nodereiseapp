@@ -17,7 +17,7 @@ const journeyService = new JourneyService(knex);
 
 app.use(
   cors({
-    origin: true,
+    origin: "*",
     credentials: true,
   })
 );

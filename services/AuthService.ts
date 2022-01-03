@@ -94,9 +94,9 @@ interface User {
 }
 
 interface sessionRow{
-  email: string,
-  sessionId: string,
-  createdAt: string
+  email: string;
+  sessionId: string;
+  createdAt: string;
 }
 
 class AuthService {

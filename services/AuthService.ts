@@ -159,7 +159,7 @@ class AuthService {
     //check if id or email already in use;
     const idData = await knex('sessionIds').where({sessionId: sessionId}).first();
     const emailData = await knex('sessionIds').where({sessionId: sessionId}).first();
-    if(!idData.first.arguments.email || !emailData.first.arguments.email) return false;
+    if(!idData.arguments.email || !emailData.arguments.email) return false;
     const date = new Date().toDateString();
     await knex('sessionIds').insert({email: email, sessionId: sessionId, createdAt: date});
     return true;

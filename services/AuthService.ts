@@ -161,7 +161,7 @@ class AuthService {
     //check if id or email already in use;
     const idData = await knex<SessionRow>('sessionIds').where({sessionId: sessionId}).first();
     const emailData = await knex<SessionRow>('sessionIds').where({sessionId: sessionId}).first();
-    if(!idData || !emailData) {
+    if(!idData.email || !emailData.email) {
       console.log("authService::setSessionId - cant set session, sessionId:", sessionId, "email:", email);
       return false;
     }

@@ -25,6 +25,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+/*
 app.use(
   OpenApiValidator.middleware({
     apiSpec: "./openapi.yaml",
@@ -32,7 +33,7 @@ app.use(
     validateResponses: false,
   })
 );
-
+*/
 const checkLogin = async (
   req: Request,
   res: express.Response,

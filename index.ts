@@ -39,6 +39,8 @@ const checkLogin = async (
   next: express.NextFunction
 ) => {
   const session = req.cookies.session;
+  console.log('session:', session);
+
   if (!session) {
     res.status(401);
     return res.json({ message: "You need to be logged in to see this page." });
@@ -48,6 +50,7 @@ const checkLogin = async (
     res.status(401);
     return res.json({ message: "You need to be logged in to see this page." });
   }
+  console.log('user found with email:', email);
   req.userEmail = email; //wird ins req geschrieben um zu wissenwelcher user eingeloggt ist
 
   next();

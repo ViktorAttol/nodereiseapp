@@ -114,6 +114,7 @@ class AuthService {
   }
 
   async checkPassword(email: string, password: string): Promise<boolean> {
+    console.log('authservice::check password called with email', email);
     const dbUser = await knex<User>("users").where({ email }).first();
     if (!dbUser) {
       return false;
@@ -143,6 +144,7 @@ class AuthService {
   async getUserForId(id: string): Promise<string>{
    // const email = knex("sessionIds").where({sessionId: id}).select('email');
     const sessionData = await knex.select('email', 'createdAt').from("sessionIds").where({sessionId: id}).first();
+    console.log('outhService::getUserForId ', sessionData);
     const email = sessionData.first.arguments.email;
     const date = sessionData.first.arguments.createdAt.toDateString();
 

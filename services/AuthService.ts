@@ -93,10 +93,10 @@ interface User {
   password: string;
 }
 
-interface sessionRow{
-  email: string,
-  sessionId: string,
-  createdAt: string
+interface SessionRow{
+  email: string;
+  sessionId: string;
+  createdAt: string;
 }
 
 class AuthService {
@@ -128,8 +128,8 @@ class AuthService {
     const correctPassword = await this.checkPassword(email, password);
     if (correctPassword) {
       const sessionId = crypto.randomUUID();
-      const isSet = await this.setSessionId(sessionId, email);
-      if(isSet) return sessionId; //todo check for problems!!!
+      await this.setSessionId(sessionId, email);
+      return sessionId; //todo check for problems!!!
     }
     return undefined;
   }
@@ -157,9 +157,12 @@ class AuthService {
 
   async setSessionId(sessionId: string, email: string): Promise<boolean>{
     //check if id or email already in use;
-    const idData = await knex('sessionIds').where({sessionId: sessionId}).first();
-    const emailData = await knex('sessionIds').where({sessionId: sessionId}).first();
-    if(!idData.first.arguments.email || !emailData.first.arguments.email) return false;
+    const idData = await knex<SessionRow>('sessionIds').where({sessionId: sessionId}).first();
+    const emailData = await knex<SessionRow>('sessionIds').where({sessionId: sessionId}).first();
+    if(!idData || !emailData) return false;
+    console.log("idData: " + idData.email);
+    console.log("emailData: " + emailData.email);
+    if(!idData.email || !emailData.email) return false;
     const date = new Date().toDateString();
     await knex('sessionIds').insert({email: email, sessionId: sessionId, createdAt: date});
     return true;

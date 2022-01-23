@@ -76,7 +76,9 @@ app.get("/journeys", checkLogin, async (req, res) => {
 
 app.post("/journey", checkLogin, async (req, res) => {
   const journey = req.body;
+  console.log('journey: ', journey)
   const journeys = await journeyService.addJourney(journey).then((newEntry) => res.send(newEntry));
+
 });
 
 app.put("/journey", checkLogin, async (req, res) => {
